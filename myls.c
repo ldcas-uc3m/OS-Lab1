@@ -4,25 +4,26 @@
 #include <dirent.h>
 #include <string.h>
 
-#define PATH_MAX 16  //TODO: set to a non-arbitrary number
+#define PATH_MAX 256  //TODO: set to a non-arbitrary number
 
-int main(int argc, char *argv[]){
+int main(int argc, char *argv[]){ // TODO: Test & fix this shit
 
 	/* ---
 	SETTING DIRECTORY
 	--- */
 
+	char *buff[PATH_MAX]; //buffer to save the directory
 	DIR *dirp; // direction pointer
 	switch (argc){
 		case 0:
 			// no argument provided, use current directory
-			dirp = getwd(dirp);
+			dirp = getcwd(buff, PATH_MAX); 
 			if (dirp == NULL){
 				printf("ERROR: Could not find current pathname.");
 			}
 			break;
 		case 1:
-			dirp = argv[1];
+			dirp = strcpy(buff, argv[1]);
 			break;
 		default:
 			// too many arguments
@@ -53,6 +54,7 @@ int main(int argc, char *argv[]){
 		printf("ERROR: Failed to read from the directory. Error No. %i", errno);
 		return -1;
 	}
+
 	/* ---
 	CLOSE
 	--- */
