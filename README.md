@@ -40,7 +40,7 @@ this purpose:
 2. It will read the contents of the file using an intermediate buffer of 1024 bytes
 (`read()`).
 3. It will write (`write()`) the content of the buffer in the standard output. Use the
-constant STDOUT_FILENO as value of the descriptor to write to the standard
+constant `STDOUT_FILENO` as value of the descriptor to write to the standard
 output.
 4. Finally, it will close the descriptor using `close()`.
 
