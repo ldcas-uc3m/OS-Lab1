@@ -8,23 +8,21 @@
 
 int main(int argc, char *argv[]){
 
-	/*
-	---
+	/* ---
 	SETTING DIRECTORY
-	---
-	*/
+	--- */
 
-	DIR *dir;
+	DIR *dirp; // direction pointer
 	switch (argc){
 		case 0:
 			// no argument provided, use current directory
-			dir = getwd(dir);
-			if (dir == NULL){
-				printf("ERROR: Could not find current pathname.")
+			dirp = getwd(dirp);
+			if (dirp == NULL){
+				printf("ERROR: Could not find current pathname.");
 			}
 			break;
 		case 1:
-			dir = argv[1];
+			dirp = argv[1];
 			break;
 		default:
 			// too many arguments
@@ -32,20 +30,32 @@ int main(int argc, char *argv[]){
 			return -1;
 	}
 
-	//TODO: fix this shit
-	int ddesc;
-	struct dirent *current;
-	while (ddesc = opendir(dir) != NULL){
-		current = readdir(dir);
-		printf("%s\n", current.d_name);
-	}
-	if (ddesc < 0){
-		printf("ERROR: Failed to open directory.\n");
+	/* ---
+	MAIN LOOP
+	--- */
+
+	//TODO: test this shit
+	int ddesc = opendir(dirp);
+	if (ddesc == NULL){
+		printf("ERROR: Failed to open directory");
 		return -1;
 	}
 
-	// struct dirent *pointer = readdir(dir);
+	struct dirent *next;
+	errno_t errno; // error number returned from readdir()
+	while (next = readdir(dirp) != NULL){
+		errno = 0;
+		printf("%s\n", next->d_name); // using "->" instead of "." bc 'next' is a pointer
+	}
 
+	if (errno != 0){
+		//NULL has been returned, because of an error
+		printf("ERROR: Failed to read from the directory. Error No. %i", errno);
+		return -1;
+	}
+	/* ---
+	CLOSE
+	--- */
 
 	closedir(ddesc);
 	return 0;
