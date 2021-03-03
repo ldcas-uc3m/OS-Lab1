@@ -51,7 +51,6 @@ output.
 * The program must return -1 if no argument was passed.
 * The program must return -1 if there was an error when opening the file (e.g. the
 file does not exist).
-<br/>
 **Test suggestion:** Check that the output of the program over one file corresponds with the
 one offered by the command cat (no extra arguments) over that same file.
 
@@ -135,9 +134,9 @@ follows the format conventions (it has the correct names and it is well compress
 some functionality tests, printing on screen the grade obtained with the provided code. The
 tester must be executed in the Linux computers of the informatic classrooms of the university:
 The command to execute the tester is the following:<br/>
-    `python checker_os _p1.py <submitted_file.zip>`<br/>
+    `$ ./python checker_os _p1.py <submitted_file.zip>`<br/>
 Being submitted_file.zip the file that it is going to be delivered in Aula Global (see next
 section). Example:<br/>
-    `$ /python checker_os_p1.py ssoo_p1_100254896_100047014.zip`<br/>
+    `$ ./python checker_os_p1.py ssoo_p1_100254896_100047014.zip`<br/>
 The Format tester will print on the console messages stating whether the required format
 is correct or not.
