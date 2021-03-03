@@ -7,7 +7,7 @@ the file system management) following the POSIX standard. Unix allows you to mak
 directly to the Operating System from a program implemented in a high level language, in
 particular, C language.<br/>
 Most of input/output (I/O) operations in Unix can be done using uniquely five calls:
-open, read, write, lseek and close.<br/>
+`open()`, `read()`, `write()`, `lseek()` and `close()`.<br/>
 For the Operating System kernel, all files opened are identified using file descriptors. A
 file descriptor is a non negative integer. When we open a file that already exists, the kernel
 returns a file descriptor to the process. When we want to read or write from/to a file, we
