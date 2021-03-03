@@ -16,33 +16,33 @@ Each open file has a current read/write position ("current file offset"). It is 
 by a non negative integer that measures the number of bytes from the beginning of the file.
 The read and write operations normally start at the current position and create an increment in
 that position equal to the number of bytes read or written. By default, this position is
-initialized to 0 when a file is opened, unless the option O_APPEND is specified. The current
-position (current_offset) of an open file can be changed explicitly using the system call
-lseek.<br/>
+initialized to 0 when a file is opened, unless the option `O_APPEND` is specified. The current
+position (`current_offset`) of an open file can be changed explicitly using the system call
+`lseek()`.<br/>
 To manipulate directories, you can use the system calls opendir, readdir y closedir. An
-open directory is identified with a directory descriptor, which is a pointer of type DIR (DIR*).
+open directory is identified with a directory descriptor, which is a pointer of type `DIR` (DIR*).
 When we open a directory with opendir, the kernel returns a directory descriptor from which
 the different entries to that directory can be read using the calls to the function readdir. The
-call readdir returns a directory entry in a pointer to a structure of type dirent (struct dirent*).
+call readdir returns a directory entry in a pointer to a structure of type `dirent` (struct dirent*).
 Such structure will contain the fields corresponding to that entry such as the name of the
 entry, or the type (if it is a normal file , another directory, symbolic links, etc.). Repeated calls
-to the function readdir will be returning the next entries in an open directory.<br/>
+to the function `readdir()` will be returning the next entries in an open directory.<br/>
 <br/>
 In this lab you will be implementing three C programs which use the system calls that
 were previously described. These programs will be mycat, myls and mysize. For this purpose
-you will have the following files with initial code mycat.c, myls.c and mysize.c.
+you will have the following files with initial code: mycat.c, myls.c and mysize.c.
 
 ### mycat
 The first program, mycat will open the file specified by argument and will show its
 content through standard output (the console) using the calls open, read, write and close. For
 this purpose:
-1. It will open the file specified as parameter with *open()*.
+1. It will open the file specified as parameter with `open()`.
 2. It will read the contents of the file using an intermediate buffer of 1024 bytes
-(*read()*).
-3. It will write (*write()*) the content of the buffer in the standard output. Use the
+(`read()`).
+3. It will write (`write()`) the content of the buffer in the standard output. Use the
 constant STDOUT_FILENO as value of the descriptor to write to the standard
 output.
-4. Finally, it will close the descriptor using *close()*.
+4. Finally, it will close the descriptor using `close()`.
 
 **Usage:** `./mycat <path_input_file>`<br/>
 <br/>
@@ -60,45 +60,44 @@ directory if no directory is specified) and print on the screen all the entries 
 contains, one per line.<br/><br/>
 This program will:
 1. Obtain the specified directory from the arguments to the program or obtain the
-current directory using the call *getcwd()*. Use the constant *PATH_MAX* as
+current directory using the call `getcwd()`. Use the constant `PATH_MAX` as
 maximum size that can have the path of the current directory.
-2. Open the directory using *opendir()*.
-3. Then, it will read in each of the entries of the directory using *readdir()* and print the
-name of the entry using *printf()*.
-4. Finally, it will close the descriptor of the directory through the call *closedir()*.
+2. Open the directory using `opendir()`.
+3. Then, it will read in each of the entries of the directory using `readdir()` and print the
+name of the entry using `printf()`.
+4. Finally, it will close the descriptor of the directory through the call `closedir()`.
 
-**Usage:** `./myls <directory>`<br/>
-**Usage 2:** `./myls`<br/>
+**Usage:** `$ ./myls <directory>`<br/>
+**Usage 2:** `$ ./myls`<br/>
 <br/>
 **Requirements:**
-* The program must list all entries of the directory , in the order in which the call to
-readdir returns them, and showing each entry in one line.
+* The program must list all entries of the directory, in the order in which the call `readdir()` returns them, and showing each entry in one line.
 * The program must list the entries of the directory passed as parameter (usage 1), or
 from the current directory if no parameter was passed.
 * The program must return -1 if an error happened while opening the directory (e.g,
-the directory does not exist)
+the directory does not exist).
 **Test suggestion:** Check that the output of the program over a directory corresponds with the
-one obtained with the command `ls -f -l` over that same directory.
+one obtained with the command `$ ls -f -l` over that same directory.
 
 ### mysize
 The third program, mysize, will obtain the current directory and will list all regular files
 that it contains as well as its size in bytes. For this purpose:
-1. It will obtain the current directory using the call *getcwd()*. Use the constant
-*PATH_MAX* as maximum size of the path of the current directory.
-2. Open the file using *opendir()*.
-3. Then, it will read the entries of the directory using *readir()*.
-4. If the entry is a regular file (field *d_type* form the structure *dirent* equal to the
-constant *DT_REG*).
-    1. Open the file using *open()*.
-    2. Move the file pointer to the end of the file and obtain its value with *lseek()*.
-    3. Close the file with *close()*.
-    4. Print the name of the file (field *d_name* of the structure dirent), followed
-    by a tab character, and the size obtained by *lseek()*, ending with an End
+1. It will obtain the current directory using the call `getcwd()`. Use the constant
+`PATH_MAX` as maximum size of the path of the current directory.
+2. Open the file using `opendir()`.
+3. Then, it will read the entries of the directory using `readir()`.
+4. If the entry is a regular file (field `d_type` form the structure `dirent` equal to the
+constant `DT_REG`):
+    1. Open the file using `open()`.
+    2. Move the file pointer to the end of the file and obtain its value with `lseek()`.
+    3. Close the file with `close()`.
+    4. Print the name of the file (field `d_name` of the structure `dirent`), followed
+    by a tab character, and the size obtained by `lseek()`, ending with an End
     Of Line character.
 5. This procedure will be repeated for every entry in the directory.
-6. Finally it will close the directory descriptor with *closedir()*.
+6. Finally it will close the directory descriptor with `closedir()`.
 
-**Usage:** `./mysize`<br/>
+**Usage:** `$ ./mysize`<br/>
 <br/>
 **Requirements:**
 * The program must show the name and size of all the regular files of the directory,
@@ -112,7 +111,7 @@ in one line.
 
 In order to facilitate the realization of this assignment an initial code is provided in the file
 p1_llamadas_2017.zip. To extract its contents you can use the *unzip* command:<br/>
-    `unzip p1_system_calls_2021.zip`<br/>
+    `$ unzip p1_system_calls_2021.zip`<br/>
 As a result, you will find a new directory p1_system_calls/, onto which you must code the
 different programs. Inside this directory you will find:
 * **Makefile:** File used by the make tool to compile all programs. Do not modify this file. Use $ make to
