@@ -114,8 +114,8 @@ p1_llamadas_2017.zip. To extract its contents you can use the *unzip* command:<b
     `$ unzip p1_system_calls_2021.zip`<br/>
 As a result, you will find a new directory p1_system_calls/, onto which you must code the
 different programs. Inside this directory you will find:
-* **Makefile:** File used by the make tool to compile all programs. Do not modify this file. Use $ make to
-compile the programs and $ make clean to remove the compiled files.
+* **Makefile:** File used by the make tool to compile all programs. Do not modify this file. Use `$ make` to
+compile the programs and `$ make clean` to remove the compiled files.
 * **mycat.c:** C Source file to code mycat.
 * **myls.c:** C Source file to code myls
 * **mysize.c:** Source file to code mysize
