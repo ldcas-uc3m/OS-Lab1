@@ -5,9 +5,9 @@
 This lab allows the student to familiarize with Operating System calls (specially related to
 the file system management) following the POSIX standard. Unix allows you to make calls
 directly to the Operating System from a program implemented in a high level language, in
-particular, C language.\s\s
+particular, C language.\\
 Most of input/output (I/O) operations in Unix can be done using uniquely five calls:
-open, read, write, lseek and close.\s\s
+open, read, write, lseek and close.\\
 For the Operating System kernel, all files opened are identified using file descriptors. A
 file descriptor is a non negative integer. When we open a file that already exists, the kernel
 returns a file descriptor to the process. When we want to read or write from/to a file, we
@@ -18,7 +18,7 @@ The read and write operations normally start at the current position and create 
 that position equal to the number of bytes read or written. By default, this position is
 initialized to 0 when a file is opened, unless the option O_APPEND is specified. The current
 position (current_offset) of an open file can be changed explicitly using the system call
-lseek.\s\s
+lseek.\\
 To manipulate directories, you can use the system calls opendir, readdir y closedir. An
 open directory is identified with a directory descriptor, which is a pointer of type DIR (DIR*).
 When we open a directory with opendir, the kernel returns a directory descriptor from which
@@ -26,8 +26,8 @@ the different entries to that directory can be read using the calls to the funct
 call readdir returns a directory entry in a pointer to a structure of type dirent (struct dirent*).
 Such structure will contain the fields corresponding to that entry such as the name of the
 entry, or the type (if it is a normal file , another directory, symbolic links, etc.). Repeated calls
-to the function readdir will be returning the next entries in an open directory.\s\s
-\s\s
+to the function readdir will be returning the next entries in an open directory.\\
+\\
 In this lab you will be implementing three C programs which use the system calls that
 were previously described. These programs will be mycat, myls and mysize. For this purpose
 you will have the following files with initial code mycat.c, myls.c and mysize.c.
@@ -43,23 +43,23 @@ this purpose:
 constant STDOUT_FILENO as value of the descriptor to write to the standard
 output.
 * Finally, it will close the descriptor using *close()*.
-\s\s
-**Usage:** `./mycat <path_input_file>`\s\s
-\s\s
+\\
+**Usage:** `./mycat <path_input_file>`\\
+\\
 **Requirements**:
 * The program must show the whole contents of the file.
 * The program must return -1 if no argument was passed.
 * The program must return -1 if there was an error when opening the file (e.g. the
 file does not exist).
-\s\s
+\?\?
 **Test suggestion:** Check that the output of the program over one file corresponds with the
 one offered by the command cat (no extra arguments) over that same file.
 
 ### myls
 The second program myls, will open a directory passed as parameter (or the current
 directory if no directory is specified) and print on the screen all the entries that this directory
-contains, one per line.\s\s
-This program will:\s\s
+contains, one per line.\?\?
+This program will:\?\?
 * Obtain the specified directory from the arguments to the program or obtain the
 current directory using the call *getcwd()*. Use the constant *PATH_MAX* as
 maximum size that can have the path of the current directory.
@@ -68,9 +68,9 @@ maximum size that can have the path of the current directory.
 name of the entry using *printf()*.
 * Finally, it will close the descriptor of the directory through the call *closedir()*.
 
-**Usage:** `./myls <directory>`\s\s
-**Usage 2:** `./myls`\s\s
-\s\s
+**Usage:** `./myls <directory>`\?\
+**Usage 2:** `./myls`\\
+\\
 **Requirements:**
 * The program must list all entries of the directory , in the order in which the call to
 readdir returns them, and showing each entry in one line.
@@ -99,8 +99,8 @@ constant *DT_REG*).
 * This procedure will be repeated for every entry in the directory.
 * Finally it will close the directory descriptor with *closedir()*.
 
-**Usage:** `./mysize`\s\s
-\s\s
+**Usage:** `./mysize`\\
+\\
 **Requirements:**
 * The program must show the name and size of all the regular files of the directory,
 in the order in which the call readir returns them, and showing the data of each file
@@ -112,20 +112,20 @@ in one line.
 ## Initial code
 
 In order to facilitate the realization of this assignment an initial code is provided in the file
-p1_llamadas_2017.zip. To extract its contents you can use the *unzip* command:\s\s
-    `unzip p1_system_calls_2021.zip`\s\s
+p1_llamadas_2017.zip. To extract its contents you can use the *unzip* command:\\
+    `unzip p1_system_calls_2021.zip`\\
 As a result, you will find a new directory p1_system_calls/, onto which you must code the
 different programs. Inside this directory you will find:
-**Makefile:**\s\s
+**Makefile:**\\
 File used by the make tool to compile all programs. Do not modify this file. Use $ make to
 compile the programs and $ make clean to remove the compiled files.
-**mycat.c:**\s\s
+**mycat.c:**\\
 C Source file to code mycat.
-**myls.c:**\s\s
+**myls.c:**\\
 C Source file to code myls
-**mysize.c:**\s\s
+**mysize.c:**\\
 Source file to code mysize
-**p1_tests/:**\s\s
+**p1_tests/:**\\
 This directory contains example files and directories to be able to execute and test your
 programs.
 
@@ -134,10 +134,10 @@ The python script *checker_os_p1.py* is given to verify that the student submiss
 follows the format conventions (it has the correct names and it is well compressed) and run
 some functionality tests, printing on screen the grade obtained with the provided code. The
 tester must be executed in the Linux computers of the informatic classrooms of the university:
-The command to execute the tester is the following:\s\s
-    `python checker_os _p1.py <submitted_file.zip>`\s\s
+The command to execute the tester is the following:\\
+    `python checker_os _p1.py <submitted_file.zip>`\\
 Being submitted_file.zip the file that it is going to be delivered in Aula Global (see next
-section). Example:\s\s
-    `$ /python checker_os_p1.py ssoo_p1_100254896_100047014.zip`\s\s
+section). Example:\\
+    `$ /python checker_os_p1.py ssoo_p1_100254896_100047014.zip`\\
 The Format tester will print on the console messages stating whether the required format
 is correct or not.
