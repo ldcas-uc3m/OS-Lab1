@@ -1,5 +1,5 @@
 # OS-Lab1: System calls
-
+By team 89-09: Ignacio Arnaiz Tierraseca, Luis Daniel Casais Mezquida & Juan Del Pino Vega
 ## Lab Statement
 
 This lab allows the student to familiarize with Operating System calls (specially related to
