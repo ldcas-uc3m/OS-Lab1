@@ -7,7 +7,7 @@ the file system management) following the POSIX standard. Unix allows you to mak
 directly to the Operating System from a program implemented in a high level language, in
 particular, C language.<br/>
 Most of input/output (I/O) operations in Unix can be done using uniquely five calls:
-open, read, write, lseek and close.<br/>
+`open()`, `read()`, `write()`, `lseek()` and `close()`.<br/>
 For the Operating System kernel, all files opened are identified using file descriptors. A
 file descriptor is a non negative integer. When we open a file that already exists, the kernel
 returns a file descriptor to the process. When we want to read or write from/to a file, we
@@ -19,11 +19,11 @@ that position equal to the number of bytes read or written. By default, this pos
 initialized to 0 when a file is opened, unless the option `O_APPEND` is specified. The current
 position (`current_offset`) of an open file can be changed explicitly using the system call
 `lseek()`.<br/>
-To manipulate directories, you can use the system calls opendir, readdir y closedir. An
-open directory is identified with a directory descriptor, which is a pointer of type `DIR` (DIR*).
-When we open a directory with opendir, the kernel returns a directory descriptor from which
-the different entries to that directory can be read using the calls to the function readdir. The
-call readdir returns a directory entry in a pointer to a structure of type `dirent` (struct dirent*).
+To manipulate directories, you can use the system calls `opendir()`, `readdir()` and `closedir()`. An
+open directory is identified with a directory descriptor, which is a pointer of type DIR (`DIR*`).
+When we open a directory with `opendir()`, the kernel returns a directory descriptor from which
+the different entries to that directory can be read using the calls to the function `readdir()`. The
+call `readdir()` returns a directory entry in a pointer to a structure of type dirent (`struct dirent*`).
 Such structure will contain the fields corresponding to that entry such as the name of the
 entry, or the type (if it is a normal file , another directory, symbolic links, etc.). Repeated calls
 to the function `readdir()` will be returning the next entries in an open directory.<br/>
