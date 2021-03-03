@@ -20,14 +20,14 @@ int main(int argc, char *argv[]){ // TODO: Test & fix this shit
 	char buff[PATH_MAX]; // Buffer to save the directory
 	DIR *dirp; // Main directory pointer
 	switch (argc){
-		case 0:
+		case 1:
 			// no argument provided, use current directory
 			dirp = getcwd(&buff, PATH_MAX); 
 			if (dirp == NULL){
 				printf("ERROR: Could not find current pathname.");
 			}
 			break;
-		case 1:
+		case 2:
 			dirp = strcpy(buff, argv[1]);
 			break;
 		default:
