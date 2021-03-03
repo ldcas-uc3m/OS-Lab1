@@ -44,7 +44,7 @@ constant `STDOUT_FILENO` as value of the descriptor to write to the standard
 output.
 4. Finally, it will close the descriptor using `close()`.
 
-**Usage:** `./mycat <path_input_file>`<br/>
+**Usage:** `$ ./mycat <path_input_file>`<br/>
 <br/>
 **Requirements**:
 * The program must show the whole contents of the file.
