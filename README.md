@@ -134,7 +134,7 @@ follows the format conventions (it has the correct names and it is well compress
 some functionality tests, printing on screen the grade obtained with the provided code. The
 tester must be executed in the Linux computers of the informatic classrooms of the university:
 The command to execute the tester is the following:<br/>
-    `$ ./python checker_os _p1.py <submitted_file.zip>`<br/>
+    `$ ./python checker_os_p1.py <submitted_file.zip>`<br/>
 Being submitted_file.zip the file that it is going to be delivered in Aula Global (see next
 section). Example:<br/>
     `$ ./python checker_os_p1.py ssoo_p1_100254896_100047014.zip`<br/>
