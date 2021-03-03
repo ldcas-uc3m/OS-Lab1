@@ -89,10 +89,10 @@ that it contains as well as its size in bytes. For this purpose:
 3. Then, it will read the entries of the directory using *readir()*.
 4. If the entry is a regular file (field *d_type* form the structure *dirent* equal to the
 constant *DT_REG*).
-    * Open the file using *open()*.
-    * Move the file pointer to the end of the file and obtain its value with *lseek()*.
-    * Close the file with *close()*.
-    * Print the name of the file (field *d_name* of the structure dirent), followed
+    4.1. Open the file using *open()*.
+    4.2. Move the file pointer to the end of the file and obtain its value with *lseek()*.
+    4.3. Close the file with *close()*.
+    4.4. Print the name of the file (field *d_name* of the structure dirent), followed
     by a tab character, and the size obtained by *lseek()*, ending with an End
     Of Line character.
 5. This procedure will be repeated for every entry in the directory.
