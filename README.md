@@ -36,13 +36,13 @@ you will have the following files with initial code mycat.c, myls.c and mysize.c
 The first program, mycat will open the file specified by argument and will show its
 content through standard output (the console) using the calls open, read, write and close. For
 this purpose:
-* It will open the file specified as parameter with *open()*.
-* It will read the contents of the file using an intermediate buffer of 1024 bytes
+1. It will open the file specified as parameter with *open()*.
+2. It will read the contents of the file using an intermediate buffer of 1024 bytes
 (*read()*).
-* It will write (*write()*) the content of the buffer in the standard output. Use the
+3. It will write (*write()*) the content of the buffer in the standard output. Use the
 constant STDOUT_FILENO as value of the descriptor to write to the standard
 output.
-* Finally, it will close the descriptor using *close()*.
+4. Finally, it will close the descriptor using *close()*.
 
 **Usage:** `./mycat <path_input_file>`<br/>
 <br/>
@@ -58,14 +58,14 @@ one offered by the command cat (no extra arguments) over that same file.
 The second program myls, will open a directory passed as parameter (or the current
 directory if no directory is specified) and print on the screen all the entries that this directory
 contains, one per line.<br/><br/>
-This program will:<br/><br/>
-* Obtain the specified directory from the arguments to the program or obtain the
+This program will:
+1. Obtain the specified directory from the arguments to the program or obtain the
 current directory using the call *getcwd()*. Use the constant *PATH_MAX* as
 maximum size that can have the path of the current directory.
-* Open the directory using *opendir()*.
-* Then, it will read in each of the entries of the directory using *readdir()* and print the
+2. Open the directory using *opendir()*.
+3. Then, it will read in each of the entries of the directory using *readdir()* and print the
 name of the entry using *printf()*.
-* Finally, it will close the descriptor of the directory through the call *closedir()*.
+4. Finally, it will close the descriptor of the directory through the call *closedir()*.
 
 **Usage:** `./myls <directory>`<br/>
 **Usage 2:** `./myls`<br/>
@@ -83,11 +83,11 @@ one obtained with the command `ls -f -l` over that same directory.
 ### mysize
 The third program, mysize, will obtain the current directory and will list all regular files
 that it contains as well as its size in bytes. For this purpose:
-* It will obtain the current directory using the call *getcwd()*. Use the constant
+1. It will obtain the current directory using the call *getcwd()*. Use the constant
 *PATH_MAX* as maximum size of the path of the current directory.
-* Open the file using *opendir()*.
-* Then, it will read the entries of the directory using *readir()*.
-* If the entry is a regular file (field *d_type* form the structure *dirent* equal to the
+2. Open the file using *opendir()*.
+3. Then, it will read the entries of the directory using *readir()*.
+4. If the entry is a regular file (field *d_type* form the structure *dirent* equal to the
 constant *DT_REG*).
     * Open the file using *open()*.
     * Move the file pointer to the end of the file and obtain its value with *lseek()*.
@@ -95,8 +95,8 @@ constant *DT_REG*).
     * Print the name of the file (field *d_name* of the structure dirent), followed
     by a tab character, and the size obtained by *lseek()*, ending with an End
     Of Line character.
-* This procedure will be repeated for every entry in the directory.
-* Finally it will close the directory descriptor with *closedir()*.
+5. This procedure will be repeated for every entry in the directory.
+6. Finally it will close the directory descriptor with *closedir()*.
 
 **Usage:** `./mysize`<br/>
 <br/>
@@ -115,17 +115,12 @@ p1_llamadas_2017.zip. To extract its contents you can use the *unzip* command:<b
     `unzip p1_system_calls_2021.zip`<br/>
 As a result, you will find a new directory p1_system_calls/, onto which you must code the
 different programs. Inside this directory you will find:
-**Makefile:**<br/>
-File used by the make tool to compile all programs. Do not modify this file. Use $ make to
+* **Makefile:** File used by the make tool to compile all programs. Do not modify this file. Use $ make to
 compile the programs and $ make clean to remove the compiled files.
-**mycat.c:**<br/>
-C Source file to code mycat.
-**myls.c:**<br/>
-C Source file to code myls
-**mysize.c:**<br/>
-Source file to code mysize
-**p1_tests/:**<br/>
-This directory contains example files and directories to be able to execute and test your
+* **mycat.c:** C Source file to code mycat.
+* **myls.c:** C Source file to code myls
+* **mysize.c:** Source file to code mysize
+* **p1_tests/:** This directory contains example files and directories to be able to execute and test your
 programs.
 
 ## Program tester
@@ -134,9 +129,9 @@ follows the format conventions (it has the correct names and it is well compress
 some functionality tests, printing on screen the grade obtained with the provided code. The
 tester must be executed in the Linux computers of the informatic classrooms of the university:
 The command to execute the tester is the following:<br/>
-    `$ ./python checker_os_p1.py <submitted_file.zip>`<br/>
+    `$ python ./checker_os_p1.py <submitted_file.zip>`<br/>
 Being submitted_file.zip the file that it is going to be delivered in Aula Global (see next
 section). Example:<br/>
-    `$ ./python checker_os_p1.py ssoo_p1_100254896_100047014.zip`<br/>
+    `$ python ./checker_os_p1.py ssoo_p1_100254896_100047014.zip`<br/>
 The Format tester will print on the console messages stating whether the required format
 is correct or not.
