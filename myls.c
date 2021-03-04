@@ -28,7 +28,7 @@ int main(int argc, char *argv[]){ // TODO: Test & fix this shit
 			}
 			break;
 		case 2:
-			dirp = strcpy(buff, argv[1]);
+			dirp = strcpy(&buff, argv[1]);
 			break;
 		default:
 			// too many arguments
