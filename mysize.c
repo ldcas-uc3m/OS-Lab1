@@ -5,6 +5,7 @@
 #include <dirent.h> 	/*Header file for system call opendir, closedir,readdir...*/
 #include <unistd.h>
 
+#define PATH_MAX 255
 
 int main(int argc, char *argv[])
 {
