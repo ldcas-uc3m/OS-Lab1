@@ -13,29 +13,38 @@ int main(int argc, char *argv[])
 	struct dirent *dir;
 	char currentdir[PATH_MAX];
 	
-	
+	/*Get the current directory in currentdir*/
 	getcwd(currentdir, PATH_MAX);
+	/*Open currentdir*/
 	directory = opendir(currentdir);
 	
+	/*Read what is in the directory*/
 	while((dir = readdir(directory)) != NULL){
+		
+		/*If it is a file execute the if statements*/
 		if(dir->d_type == DT_REG){
-
+			
+			/*Open the file*/
 			infile = open(dir->d_name, O_RDONLY);
-
+			
+			/*Error when openning the file*/
 			if (infile < 0){
 				return -1;
 			}
 			
-			long position;
-
-			position = lseek(infile, 0, SEEK_END);
+			/*Get the offset of the file*/
+			off_t offset = lseek(infile, 0, SEEK_END);
 			
+			/*Close file*/
 			close(infile);
-			printf("%s	%ld\n", dir->d_name, position);
+			
+			/*Print the file name and the offset separated by a tab*/
+			printf("%s	%ld\n", dir->d_name, offset);
 		}
 
 	}
 
+	/*Close directory*/
 	closedir(directory);
 
 	return 0;
