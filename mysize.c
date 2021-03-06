@@ -5,8 +5,6 @@
 #include <dirent.h> 	/*Header file for system call opendir, closedir,readdir...*/
 #include <unistd.h>
 
-#define PATH_MAX 4096
-
 int main(int argc, char *argv[])
 {
 	int infile;
@@ -35,7 +33,7 @@ int main(int argc, char *argv[])
 			}
 			
 			/*Get the offset of the file*/
-			off_t offset = lseek(infile, 0, SEEK_END);
+			off_t offset = lseek(infile, 0, SEEK_END); //lseek() sets the offset of the file to the end of it + 0, and returns the offset
 			
 			/*If error in lseek*/
 			if(offset == -1){
