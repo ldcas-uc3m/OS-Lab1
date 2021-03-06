@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 	/*Open currentdir*/
 	directory = opendir(currentdir);
 	
-	/*int errno = 0*/
+	int errno = 0
 	/*Read what is in the directory*/
 	while((dir = readdir(directory)) != NULL){
 		
@@ -37,9 +37,10 @@ int main(int argc, char *argv[])
 			/*Get the offset of the file*/
 			off_t offset = lseek(infile, 0, SEEK_END);
 			
-			/*if(offset == -1){
+			/*If error in lseek*/
+			if(offset == -1){
 				return -1;
-			}*/
+			}
 			
 			/*Close file*/
 			close(infile);
@@ -50,9 +51,9 @@ int main(int argc, char *argv[])
 
 	}
 	/*If directory could not be read return -1*/
-	/*if(errno != 0){
+	if(errno != 0){
 		return -1;
-	}*/
+	}
 			
 	
 	/*Close directory*/
