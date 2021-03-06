@@ -5,7 +5,7 @@
 #include <dirent.h> 	/*Header file for system call opendir, closedir,readdir...*/
 #include <unistd.h>
 
-#define PATH_MAX 255
+#define PATH_MAX 4096
 
 int main(int argc, char *argv[])
 {
@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 	/*Open currentdir*/
 	directory = opendir(currentdir);
 	
-	int errno = 0
+	int errno = 0;
 	/*Read what is in the directory*/
 	while((dir = readdir(directory)) != NULL){
 		
