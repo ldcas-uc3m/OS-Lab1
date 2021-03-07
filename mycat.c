@@ -21,7 +21,7 @@
 /* Global variables                         */
 /* ---------------------------------------- */
   
-char  buff_RX[MAX_BUFFER+1];           // Buffer to read the file 1024 Bytes, plus 1 for the string end
+char  buff_RX[MAX_BUFFER];           // Buffer to read the file 1024 Bytes, plus 1 for the string end
 char* fName = NULL;                    // Name of the File to read
 int   hFile;                           // Handle File 
 
@@ -47,16 +47,22 @@ int main(int argc, char* argv[])
 		hFile = open(fName, O_RDONLY);
 		if ( hFile!=-1 )              // If hFile is -1 that means that the provided file has not been found
 		   {
-		     // Loop to read the file
-		     while ((nBytes = read(hFile, buff_RX,MAX_BUFFER ))!=0)  // A maximum of 1024 bytes from the file is copied ino the buffer in each turn
-                   {
-		     	   write(STDOUT_FILENO, buff_RX, MAX_BUFFER);
-			       }
+			int mBytes;
+		    // Loop to read the file
+		    while ((nBytes = read(hFile, buff_RX,MAX_BUFFER ))!=0)  // A maximum of 1024 bytes from the file is copied ino the buffer in each turn
+            {
+		     	mBytes = write(STDOUT_FILENO, buff_RX, MAX_BUFFER);
+				if(mBytes < 0)
+				{
+					printf("Error writting");
+					return -1;
+				}
+			}
 
-				 // Close File 
-				 close(hFile);
-				 exitCode = RETURN_OK;
-			 }
+			// Close File 
+			close(hFile);
+			exitCode = RETURN_OK;
+		}
 		  
   	  }
 
