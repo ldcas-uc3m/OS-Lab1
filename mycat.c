@@ -49,16 +49,21 @@ int main(int argc, char* argv[])
 		   {
 			int mBytes;
 		    // Loop to read the file
-		    while ((nBytes = read(hFile, buff_RX, MAX_BUFFER )) != 0)  // A maximum of 1024 bytes from the file is copied ino the buffer in each turn
+		    while ((nBytes = read(hFile, buff_RX, MAX_BUFFER )) > 0)  // A maximum of 1024 bytes from the file is copied ino the buffer in each turn
             {
 		     	mBytes = write(STDOUT_FILENO, buff_RX, MAX_BUFFER);
 				if(mBytes < 0)
 				{
 					printf("Error writting");
-					return -1;
+					exitCode = RETURN_ERROR;
 				} else{
 					printf("%s", buff_RX);
 				}
+			}
+
+			if(nBytes == -1){
+				printf("Error reading the file");
+				exitCode = RETURN_ERROR;
 			}
 
 			// Close File 
