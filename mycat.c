@@ -49,8 +49,14 @@ int main(int argc, char* argv[])
 			int mBytes;
 		    // Loop to read the file
 		    while ((nBytes = read(hFile, buff_RX, MAX_BUFFER )) > 0)  // A maximum of 1024 bytes from the file is copied ino the buffer in each turn
-            {
-		     	mBytes = write(STDOUT_FILENO, buff_RX, MAX_BUFFER);
+            {	
+				if (nBytes < MAX_BUFFER){
+					/* The buffer is not full */
+					mBytes = write(STDOUT_FILENO, buff_RX, nBytes);
+				} else{
+					mBytes = write(STDOUT_FILENO, buff_RX, MAX_BUFFER); // write to the output, similar to printf()
+				}
+		     	
 			}
 
 			if(nBytes == -1){
