@@ -22,6 +22,7 @@ int main(int argc, char *argv[]){
 			getcwd(buff, PATH_MAX); // note to self: on buff[n], buff serves as the pointer
 			if (buff == NULL){
 				printf("ERROR: Could not find current pathname.");
+				return -1;
 			}
 			break;
 		case 2:
@@ -43,10 +44,10 @@ int main(int argc, char *argv[]){
 		return -1;
 	}
 
-	struct dirent *next;
+	struct dirent *current;
 	int errno = 0; // error number "returned" from readdir(). If != 0, an error has ocurred
-	while ((next = readdir(dirp)) != NULL){
-		printf("%s\n", next->d_name); // using "->" instead of "." bc 'next' is a pointer
+	while ((current = readdir(dirp)) != NULL){
+		printf("%s\n", current->d_name); // using "->" instead of "." bc 'current' is a pointer
 	}
 
 	if (errno != 0){

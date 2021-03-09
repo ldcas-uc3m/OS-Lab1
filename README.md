@@ -51,6 +51,7 @@ output.
 * The program must return -1 if no argument was passed.
 * The program must return -1 if there was an error when opening the file (e.g. the
 file does not exist).
+
 **Test suggestion:** Check that the output of the program over one file corresponds with the
 one offered by the command cat (no extra arguments) over that same file.
 
