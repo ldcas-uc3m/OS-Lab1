@@ -1,6 +1,6 @@
-/* ---------------------------------------- */
-/* Includes Section                         */
-/* ---------------------------------------- */
+/* ---
+Includes Section
+--- */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,54 +9,44 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-/* ---------------------------------------- */
-/* Defines Section                          */
-/* ---------------------------------------- */
+/* ---
+Defines Section
+--- */
 
 #define MAX_BUFFER 1024
 #define RETURN_OK     0
 #define RETURN_ERROR -1
 
-/* ---------------------------------------- */
-/* Global variables                         */
-/* ---------------------------------------- */
-  
- 
-
-/* ---------------------------------------- */
-/* Main                                     */   
-/* ---------------------------------------- */
+/* ---
+ Main   
+--- */
 int main(int argc, char* argv[])
 {
-	char  buff_RX[MAX_BUFFER];           // Buffer to read the file 1024 Bytes
-	char* fName = NULL;                    // Name of the File to read
-	int   hFile;                           // Handle File
-	int exitCode; // Code of the return of the program (RETURN_OK =0) or (RETURN_ERROR =-1)
-	int nBytes;   // Auxiliary variable to read the file
-	int flgRead;
+	char  buff_RX[MAX_BUFFER];   // Buffer to read the file 1024 Bytes
+	char* fName = NULL;          // Name of the File to read
+	int hFile;                   // Handle File
+	int exitCode = RETURN_ERROR; // Code of the return of the program (RETURN_OK =0) or (RETURN_ERROR =-1)
+	int nBytes;                  // Auxiliary variable to read the file
 	
-	exitCode = RETURN_ERROR;
-	
-	if (argc == 2)
-	  {
-	
+	if (argc == 2){
+		
 		fName = argv[1];
 			
 		/* Open File */
 		hFile = open(fName, O_RDONLY);
-		if ( hFile != -1 )              // If hFile is -1 that means that the provided file has not been found
-		   {
+		if (hFile != -1){
+			/* the provided file has been found */
+
 			int mBytes;
-		    // Loop to read the file
-		    while ((nBytes = read(hFile, buff_RX, MAX_BUFFER )) > 0)  // A maximum of 1024 bytes from the file is copied ino the buffer in each turn
-            {	
-				if (nBytes < MAX_BUFFER){
-					/* The buffer is not full */
-					mBytes = write(STDOUT_FILENO, buff_RX, nBytes);
-				} else{
-					mBytes = write(STDOUT_FILENO, buff_RX, MAX_BUFFER); // write to the output, similar to printf()
+		    /* Loop to read the file */
+		    while ((nBytes = read(hFile, buff_RX, MAX_BUFFER)) > 0){ // A maximum of 1024 bytes from the file is copied ino the buffer in each turn
+            	
+				mBytes = write(STDOUT_FILENO, buff_RX, nBytes); // write the data read to output, similar to printf()
+				if (mBytes < 0){
+					printf("Error writting the file");
+					exitCode = RETURN_ERROR;
+					break;
 				}
-		     	
 			}
 
 			if(nBytes == -1){
@@ -64,13 +54,19 @@ int main(int argc, char* argv[])
 				exitCode = RETURN_ERROR;
 			}
 
-			// Close File 
+			/* Close File */ 
 			close(hFile);
 			exitCode = RETURN_OK;
+		}
+		else{
+			/* the provided file has been found */
+			printf("Error locating the file");
+			exitCode = RETURN_ERROR;
 		}
 		  
   	}
 	else{
+		printf("Syntax error");
 		exitCode = RETURN_ERROR;
 	}
 
